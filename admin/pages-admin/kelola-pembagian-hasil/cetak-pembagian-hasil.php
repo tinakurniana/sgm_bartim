@@ -22,11 +22,11 @@ $sheet->setCellValue('K1', 'Pendapatan Bersih');
 
 $id_tahun = $_GET['id_tahun'];
 $id_bulan = $_GET['id_bulan'];
-$query_hasil_produksi = "SELECT * FROM hasil_produksi WHERE id_tahun = '$id_tahun' AND id_bulan = '$id_bulan'";
-$hasil_produksi = tampilData($query_hasil_produksi);
-$id_hasil_produksi = $hasil_produksi[0]['id'];
 
-$data = mysqli_query($conn, "SELECT * FROM pembagian_hasil INNER JOIN anggota ON anggota.id_anggota = pembagian_hasil.id_anggota WHERE pembagian_hasil.id_hasil_produksi = $id_hasil_produksi");
+$data = mysqli_query($conn, "SELECT * FROM pembagian_hasil
+                            INNER JOIN anggota ON anggota.id_anggota = pembagian_hasil.id_anggota
+                            WHERE
+                            pembagian_hasil.id_tahun = $id_tahun AND pembagian_hasil.id_bulan = $id_bulan");
 
 $i = 2;
 $no = 1;

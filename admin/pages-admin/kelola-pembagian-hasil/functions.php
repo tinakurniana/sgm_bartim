@@ -56,23 +56,18 @@ function tambahDataPembagianHasil($data)
     global $conn;
     $id_anggota = htmlspecialchars($data['id_anggota']);
     $tanggal = htmlspecialchars($data['tanggal']);
-    $id_hasil_produksi = htmlspecialchars($data['id_hasil_produksi']);
-    $hasil_produksi = htmlspecialchars($data['hasil_produksi']);
-    $total_luas = htmlspecialchars($data['total_luas']);
     $id_tahun = htmlspecialchars($data['id_tahun']);
     $id_bulan = htmlspecialchars($data['id_bulan']);
+    $total_bersih = htmlspecialchars($data['total_bersih']);
 
-    $luas_anggota = tampilData("SELECT luas_plasma FROM anggota WHERE id_anggota = '$id_anggota'");
-
-    $pendapatan = (((float)$hasil_produksi/(float)$total_luas)*(float)$luas_anggota[0]['luas_plasma']);
     $potongan = 5000;
-    $total_bersih = $pendapatan - $potongan;
+    $pendapatan = ($total_bersih+$potongan);
 
     $cek = tampilData("SELECT * FROM pembagian_hasil WHERE id_anggota = '$id_anggota';");
     if (count($cek) > 0) {
         echo '<script>alert("Data Gagal Ditambahkan! Pembagian hasil anggota sudah ada"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
     } else {
-        $query = "INSERT INTO pembagian_hasil VALUES ('', '$id_anggota', '$tanggal', '$pendapatan', '$potongan', '$total_bersih', '$id_hasil_produksi')";
+        $query = "INSERT INTO pembagian_hasil VALUES ('', '$id_anggota', '$tanggal', '$pendapatan', '$potongan', '$total_bersih', '$id_tahun', '$id_bulan')";
         // jika query berhasil dieksekusi maka akan menambahkan data lagi ke tabel simpanan wajib
         if (mysqli_query($conn, $query)) {
             // query tambah data ke simpanan pokok
@@ -118,44 +113,4 @@ function hapusDataPembagianHasil($data)
     mysqli_close($conn);
 }
 
-function tambahHasilProduksi($data)
-{
-    global $conn;
-    $total_luas = ($data['total_luas']);
-    $total_hasil_produksi = ($data['total_hasil_produksi']);
-    $id_tahun = htmlspecialchars($data['id_tahun']);
-    $id_bulan = htmlspecialchars($data['id_bulan']);
-
-    $cek = tampilData("SELECT * FROM hasil_produksi WHERE id_tahun = '$id_tahun' AND id_bulan = '$id_bulan'");
-    if (count($cek) == 0) {
-        $query = "INSERT INTO hasil_produksi VALUES ('', '$total_luas', '$total_hasil_produksi', '$id_tahun', '$id_bulan')";
-        if (mysqli_query($conn, $query)) {
-            echo "<script>
-                alert('Data Berhasil Ditambahkan'); 
-                location.href = 'indexAdmin.php?p=kelola-pembagian-hasil&m=pembagian-hasil&id_tahun=" . $id_tahun . "&id_bulan=" . $id_bulan . "';
-            </script>";
-        } else {
-            echo "<script>
-                alert('Data Berhasil Ditambahkan'); 
-                location.href = 'indexAdmin.php?p=kelola-pembagian-hasil&m=pembagian-hasil&id_tahun=" . $id_tahun . "&id_bulan=" . $id_bulan . "';
-            </script>";
-        }
-        mysqli_close($conn);
-    } else {
-        $id = $cek[0]['id'];
-        $query = "UPDATE hasil_produksi SET total_hasil_produksi = '$total_hasil_produksi' WHERE id = $id";
-        if (mysqli_query($conn, $query)) {
-            echo "<script>
-                alert('Data Berhasil Ditambahkan'); 
-                location.href = 'indexAdmin.php?p=kelola-pembagian-hasil&m=pembagian-hasil&id_tahun=" . $id_tahun . "&id_bulan=" . $id_bulan . "';
-            </script>";
-        } else {
-            echo "<script>
-                alert('Data Berhasil Ditambahkan'); 
-                location.href = 'indexAdmin.php?p=kelola-pembagian-hasil&m=pembagian-hasil&id_tahun=" . $id_tahun . "&id_bulan=" . $id_bulan . "';
-            </script>";
-        }
-        mysqli_close($conn);
-    }
-}
 ?>

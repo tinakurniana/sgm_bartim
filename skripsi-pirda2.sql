@@ -97,25 +97,6 @@ CREATE TABLE `galeri` (
 
 /*Data for the table `galeri` */
 
-/*Table structure for table `hasil_produksi` */
-
-DROP TABLE IF EXISTS `hasil_produksi`;
-
-CREATE TABLE `hasil_produksi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `total_luas` varchar(255) NOT NULL,
-  `total_hasil_produksi` bigint(20) NOT NULL,
-  `id_tahun` int(11) NOT NULL,
-  `id_bulan` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_tahun` (`id_tahun`),
-  KEY `id_bulan` (`id_bulan`),
-  CONSTRAINT `hasil_produksi_ibfk_1` FOREIGN KEY (`id_tahun`) REFERENCES `tahun` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `hasil_produksi_ibfk_2` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*Data for the table `hasil_produksi` */
-
 /*Table structure for table `kontak` */
 
 DROP TABLE IF EXISTS `kontak`;
@@ -141,12 +122,15 @@ CREATE TABLE `pembagian_hasil` (
   `pendapatan` int(11) NOT NULL,
   `potongan` int(11) NOT NULL,
   `total_bersih` int(11) NOT NULL,
-  `id_hasil_produksi` int(11) NOT NULL,
+  `id_tahun` int(11) NOT NULL,
+  `id_bulan` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_anggota` (`id_anggota`),
-  KEY `id_hasil_produksi` (`id_hasil_produksi`),
+  KEY `id_tahun` (`id_tahun`),
+  KEY `id_bulan` (`id_bulan`),
   CONSTRAINT `pembagian_hasil_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE,
-  CONSTRAINT `pembagian_hasil_ibfk_4` FOREIGN KEY (`id_hasil_produksi`) REFERENCES `hasil_produksi` (`id`) ON DELETE CASCADE
+  CONSTRAINT `pembagian_hasil_ibfk_2` FOREIGN KEY (`id_tahun`) REFERENCES `tahun` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pembagian_hasil_ibfk_3` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pembagian_hasil` */
