@@ -63,7 +63,7 @@ function tambahDataPembagianHasil($data)
     $potongan = 5000;
     $pendapatan = ($total_bersih+$potongan);
 
-    $cek = tampilData("SELECT * FROM pembagian_hasil WHERE id_anggota = '$id_anggota';");
+    $cek = tampilData("SELECT * FROM pembagian_hasil WHERE id_anggota = '$id_anggota' AND id_tahun = '$id_tahun' AND id_bulan = '$id_bulan';");
     if (count($cek) > 0) {
         echo '<script>alert("Data Gagal Ditambahkan! Pembagian hasil anggota sudah ada"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
     } else {
