@@ -69,7 +69,7 @@ if (isset($_POST['btn-hapus'])) {
 										<th>No.Rek</th>
 										<th>Bank</th>
 										<th>Username</th>
-										<th>NO.HP</th>
+										<th>No.HP</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -179,8 +179,8 @@ if (isset($_POST['btn-hapus'])) {
 									<input type="text" id="bank" name="bank" placeholder="Bank" class="col-xs-12 col-sm-12" required />
 								</div>
 								<div class="row-sm-4">
-									<label class="control-label" for="no_hp">NO. HP</label>
-									<input type="text" id="no_hp" name="no_hp" placeholder="NO. HP" class="col-xs-12 col-sm-12" required />
+									<label class="control-label" for="no_hp">No. HP</label>
+									<input type="text" id="no_hp" name="no_hp" placeholder="No. HP" class="col-xs-12 col-sm-12" required />
 								</div>
 								<div class="row-sm-4">
 									<label class="control-label" for="username">Username Akun</label>
