@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // mengkoneksikan ke database
 $host = 'localhost';
@@ -23,6 +23,7 @@ function tambahDataAnggota($data) // Function untuk menambah data anggota
     $luas_plasma = htmlspecialchars($data['luas_plasma']);
     $no_rek = htmlspecialchars($data['no_rek']);
     $bank = htmlspecialchars($data['bank']);
+    $no_hp = htmlspecialchars($data['no_hp']);
 
     // memanggil function uploadFoto
     $foto = uploadFoto();
@@ -37,13 +38,11 @@ function tambahDataAnggota($data) // Function untuk menambah data anggota
                         WHERE tahun.id = '$tahun_bergabung';");
     if (count($cek) > 0) {
         echo '<script>alert("Data Gagal Ditambahkan! No.kartu / no.registrasi sudah ada"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
-    } 
-    else if (count($cek2) > 0) {
+    } else if (count($cek2) > 0) {
         echo '<script>alert("Data Gagal Ditambahkan! Pembagian hasil di tahun tersebut sudah dilakukan"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
-    } 
-    else {
+    } else {
         // query untuk insert data anggota
-        $query = "INSERT INTO anggota VALUES ('', '$username', '$password', '$nama', '$no_kartu', '$no_registrasi', '$alamat', '$ktp', '$luas_plasma', '$foto', '$no_rek', '$bank', '$tahun_bergabung')";
+        $query = "INSERT INTO anggota VALUES ('', '$username', '$password', '$nama', '$no_kartu', '$no_registrasi', '$alamat', '$ktp', '$luas_plasma', '$foto', '$no_rek', '$bank', '$tahun_bergabung','$no_hp')";
         // jika query berhasil dieksekusi maka akan menambahkan data lagi ke tabel simpanan pokok
         if (mysqli_query($conn, $query)) {
             // mengembalikan id dari query terakhir

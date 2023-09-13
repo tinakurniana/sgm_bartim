@@ -16,7 +16,7 @@ function tambahDataTahun($data)
     if (count($cek) > 0) {
         echo '<script>alert("Data Gagal Ditambahkan, Tahun Sudah Ada"); location.href = "indexAdmin.php?p=kelola-tahun&m=kelola-tahun";</script>';
     } else {
-        $query = "INSERT INTO tahun VALUES ('', '$tahun')";
+        $query = "INSERT INTO tahun VALUES ('','$tahun')";
         if (mysqli_query($conn, $query)) {
             echo '<script>alert("Data Berhasil Ditambahkan"); location.href = "indexAdmin.php?p=kelola-tahun&m=kelola-tahun";</script>';
         } else {
@@ -62,5 +62,3 @@ function hapusDataTahun($data)
     }
     mysqli_close($conn);
 }
-
-?>

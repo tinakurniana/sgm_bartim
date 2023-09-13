@@ -69,6 +69,7 @@ if (isset($_POST['btn-hapus'])) {
 										<th>No.Rek</th>
 										<th>Bank</th>
 										<th>Username</th>
+										<th>NO.HP</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -93,6 +94,7 @@ if (isset($_POST['btn-hapus'])) {
 											<td><?= $row['no_rek']; ?></td>
 											<td><?= $row['bank']; ?></td>
 											<td><?= $row['username']; ?></td>
+											<td><?= $row['no_hp']; ?></td>
 											<td class="center">
 												<div class="action-buttons">
 													<a data-rel="tooltip" data-placement="top" title="Ubah" style="margin-right:5px" class="blue tooltip-info" data-toggle="modal" href="#edit-anggota-<?= $row['id_anggota']; ?>">
@@ -175,6 +177,10 @@ if (isset($_POST['btn-hapus'])) {
 								<div class="row-sm-4">
 									<label class="control-label" for="bank">Bank</label>
 									<input type="text" id="bank" name="bank" placeholder="Bank" class="col-xs-12 col-sm-12" required />
+								</div>
+								<div class="row-sm-4">
+									<label class="control-label" for="no_hp">NO. HP</label>
+									<input type="text" id="no_hp" name="no_hp" placeholder="NO. HP" class="col-xs-12 col-sm-12" required />
 								</div>
 								<div class="row-sm-4">
 									<label class="control-label" for="username">Username Akun</label>

@@ -419,6 +419,15 @@ if (isset($_POST['reset'])) {
 
                             <b class="arrow"></b>
                         </li>
+
+                        <li class="hover <?= $p === 'kelola-pengumuman' ? 'active' : '' ?>">
+                            <a href="indexAdmin.php?p=kelola-pengumuman&m=kelola-pengumuman">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Kelola Pengumuman
+                            </a>
+
+                            <b class="arrow"></b>
+                        </li>
                     </ul>
                 </li>
 
