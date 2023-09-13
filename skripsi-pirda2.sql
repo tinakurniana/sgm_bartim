@@ -50,12 +50,18 @@ CREATE TABLE `anggota` (
   `no_rek` varchar(255) NOT NULL,
   `bank` varchar(255) NOT NULL,
   `id_tahun` int(11) NOT NULL,
+  `no_hp` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
   PRIMARY KEY (`id_anggota`),
   KEY `id_tahun` (`id_tahun`),
   CONSTRAINT `anggota_ibfk_1` FOREIGN KEY (`id_tahun`) REFERENCES `tahun` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `anggota` */
+
+insert  into `anggota`(`id_anggota`,`username`,`password`,`nama`,`no_kartu`,`no_registrasi`,`alamat`,`ktp`,`luas_plasma`,`foto`,`no_rek`,`bank`,`id_tahun`,`no_hp`,`status`) values 
+(1,'tina','ef2afe0ea76c76b6b4b1ee92864c4d5c','Tina Kurniana','001','T.II/WH/0001','aaa','98737818','0.5','64d8cdfe487a9.png','123','BNI',1,'082148307204','Aktif'),
+(2,'tina','ef2afe0ea76c76b6b4b1ee92864c4d5c','Tina Kurniana','001','T.II/WH/0001','aaa','98737818','0.5','64d8cdfe487a9.png','123','BNI',1,'089530656545','Non aktif');
 
 /*Table structure for table `bulan` */
 
@@ -93,9 +99,12 @@ CREATE TABLE `galeri` (
   `judul` varchar(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   PRIMARY KEY (`id_galeri`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `galeri` */
+
+insert  into `galeri`(`id_galeri`,`foto`,`judul`,`keterangan`) values 
+(1,'6501adbb97be8.jpg','asd','asd');
 
 /*Table structure for table `kontak` */
 
@@ -107,9 +116,12 @@ CREATE TABLE `kontak` (
   `telp` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `kontak` */
+
+insert  into `kontak`(`id`,`alamat`,`telp`,`email`) values 
+(1,'Murutuwu, Kec. Paju Epat, Kabupaten Barito Timur, Kalimantan Tengah 73614','0852-4801-3601','pt.sgm@gmail.com');
 
 /*Table structure for table `pembagian_hasil` */
 
@@ -131,9 +143,27 @@ CREATE TABLE `pembagian_hasil` (
   CONSTRAINT `pembagian_hasil_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE,
   CONSTRAINT `pembagian_hasil_ibfk_2` FOREIGN KEY (`id_tahun`) REFERENCES `tahun` (`id`) ON DELETE CASCADE,
   CONSTRAINT `pembagian_hasil_ibfk_3` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `pembagian_hasil` */
+
+insert  into `pembagian_hasil`(`id`,`id_anggota`,`tanggal`,`pendapatan`,`potongan`,`total_bersih`,`id_tahun`,`id_bulan`) values 
+(1,1,'2019-01-01',15000,5000,10000,1,1),
+(2,1,'2019-02-01',20000,5000,15000,1,2);
+
+/*Table structure for table `pengumuman` */
+
+DROP TABLE IF EXISTS `pengumuman`;
+
+CREATE TABLE `pengumuman` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pengumuman` varchar(255) DEFAULT NULL,
+  `judul` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `pengumuman` */
 
 /*Table structure for table `pengurus` */
 
@@ -159,9 +189,12 @@ CREATE TABLE `profil` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `keterangan` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `profil` */
+
+insert  into `profil`(`id`,`keterangan`) values 
+(2,'<p>PT. Sawit Graha Manunggal adalah sebuah perusahaan perkebunan sawit swasta yang merupakan bagian dari Anglo Eastern Plantation (AEP) Group yaitu perusahaan PMA yang berdiri sejak tahun 1985, berkedudukan di Inggris dan terdaftar di London Stock Exchange.&nbsp;Pada tanggal 10 Desember 2007, AEP Indonesia berekspansi ke Kalimantan Tengah, tepatnya di daerah Tamiang Layang dan membangun kebun yang bernama PT. Sawit Graha Manunggal. Wilayah kerja PT. Sawit Graha Manunggal berada di Kabupaten Barito Timur dengan lokasi meliputi 6 wilayah kecamatan yaitu : Kecamatan Dusun Timur, Kecamatan Karusen Janang, Kecamatan Paku, Kecamatan Dusun Tengah, Kecamatan Paju Epat, dan Kecamatan Pematang Karau. Pembangunan usaha perkebunan dilakukan melalui pola Kebun Inti &amp; Kebun Kemitraan (Kebun Plasma dan Kebun Kas Desa)</p>\r\n');
 
 /*Table structure for table `simpanan_pokok` */
 
@@ -175,9 +208,12 @@ CREATE TABLE `simpanan_pokok` (
   UNIQUE KEY `id` (`id`),
   KEY `id_anggota` (`id_anggota`),
   CONSTRAINT `simpanan_pokok_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `simpanan_pokok` */
+
+insert  into `simpanan_pokok`(`id`,`id_anggota`,`simpanan`) values 
+(1,1,50000);
 
 /*Table structure for table `simpanan_wajib` */
 
@@ -197,9 +233,13 @@ CREATE TABLE `simpanan_wajib` (
   CONSTRAINT `simpanan_wajib_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE,
   CONSTRAINT `simpanan_wajib_ibfk_3` FOREIGN KEY (`id_tahun`) REFERENCES `tahun` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `simpanan_wajib_ibfk_4` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `simpanan_wajib` */
+
+insert  into `simpanan_wajib`(`id`,`id_anggota`,`tanggal`,`simpanan_wajib`,`id_bulan`,`id_tahun`) values 
+(1,1,'2019-01-01',5000,1,1),
+(2,1,'2019-02-01',5000,2,1);
 
 /*Table structure for table `tahun` */
 
@@ -209,9 +249,14 @@ CREATE TABLE `tahun` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tahun` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tahun` */
+
+insert  into `tahun`(`id`,`tahun`) values 
+(1,2019),
+(2,2022),
+(3,2023);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

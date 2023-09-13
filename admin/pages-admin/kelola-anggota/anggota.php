@@ -72,6 +72,7 @@ if (isset($_POST['btn-edit-status'])) {
 										<th>No.Rek</th>
 										<th>Bank</th>
 										<th>Username</th>
+										<th>No.HP</th>
 										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
@@ -97,6 +98,7 @@ if (isset($_POST['btn-edit-status'])) {
 											<td><?= $row['no_rek']; ?></td>
 											<td><?= $row['bank']; ?></td>
 											<td><?= $row['username']; ?></td>
+											<td><?= $row['no_hp']; ?></td>
 											<td>
 												<?php
 												if ($row['status'] == 'Aktif') {
@@ -174,6 +176,10 @@ if (isset($_POST['btn-edit-status'])) {
 								<div class="row-sm-4">
 									<label class="control-label" for="ktp">KTP</label>
 									<input type="text" id="ktp" name="ktp" placeholder="Nomor KTP" class="col-xs-12 col-sm-12" required />
+								</div>
+								<div class="row-sm-4">
+									<label class="control-label" for="no_hp">No. HP</label>
+									<input type="text" id="no_hp" name="no_hp" placeholder="No. HP" class="col-xs-12 col-sm-12" required />
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -260,6 +266,10 @@ if (isset($_POST['btn-edit-status'])) {
 									<div class="row-sm-4">
 										<label class="control-label" for="ktp">KTP</label>
 										<input type="text" id="ktp" name="ktp" value="<?= $row['ktp']; ?>" class="col-xs-12 col-sm-12" required />
+									</div>
+									<div class="row-sm-4">
+										<label class="control-label" for="no_hp">No.HP</label>
+										<input type="text" id="no_hp" name="no_hp" value="<?= $row['no_hp']; ?>" class="col-xs-12 col-sm-12" required />
 									</div>
 								</div>
 								<div class="col-sm-6">

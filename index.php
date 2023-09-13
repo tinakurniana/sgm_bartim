@@ -7,12 +7,14 @@ $query_pengurus = "SELECT * FROM pengurus";
 $query_galeri = "SELECT * FROM galeri";
 $query_kontak = "SELECT * FROM kontak";
 $query_profil = "SELECT * FROM profil";
+$query_pengumuman = "SELECT * FROM pengumuman";
 
 // menampilkan data dengan memanggil function tampilData dan parameternya diisi dengan select diatas
 $pengurus = tampilData($query_pengurus);
 $galeri = tampilData($query_galeri);
 $kontak = tampilData($query_kontak);
 $profil = tampilData($query_profil);
+$pengumuman = tampilData($query_pengumuman);
 ?>
 
 <!DOCTYPE html>
@@ -96,6 +98,7 @@ $profil = tampilData($query_profil);
                     <a href="#struktur" class="nav-item nav-link">Struktur Organisasi</a>
                     <a href="#galeri" class="nav-item nav-link">Galeri</a>
                     <a href="#kontak" class="nav-item nav-link">Kontak</a>
+                    <a href="#pengumuman" class="nav-item nav-link">Pengumuman</a>
                 </div>
                 <a href="login.php" class="btn btn-primary rounded-pill py-2 px-4">Login Anggota</a>
             </div>
@@ -173,17 +176,42 @@ $profil = tampilData($query_profil);
                 <h6 class="section-title bg-white text-center text-primary px-3">Galeri</h6>
                 <h1 class="mb-5">Dokumentasi</h1>
             </div>
+
             <div class="row g-4 justify-content-center">
                 <!-- Looping untuk menampilkan data galeri -->
                 <?php foreach ($galeri as $gr) : ?>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="package-item">
-                            <div class="overflow-hidden">
-                                <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
+                    <a href="#galeriModal-<?= $gr['id_galeri'] ?>" data-toggle="modal">
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="package-item">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
+                                </div>
+                                <div class="text-center p-4">
+                                    <h3 class="mb-3"><?= $gr['judul']; ?></h3>
+                                    <p><?= $gr['keterangan']; ?></p>
+                                </div>
                             </div>
-                            <div class="text-center p-4">
-                                <h3 class="mb-3"><?= $gr['judul']; ?></h3>
-                                <p><?= $gr['keterangan']; ?></p>
+                        </div>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="galeriModal-<?= $gr['id_galeri'] ?>" tabindex="-1" role="dialog" aria-labelledby="galeriModal-<?= $gr['id_galeri'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="package-item">
+                                        <div class="overflow-hidden">
+                                            <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
+                                        </div>
+                                        <div class="text-center p-4">
+                                            <h3 class="mb-3"><?= $gr['judul']; ?></h3>
+                                            <p><?= $gr['keterangan']; ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -192,6 +220,54 @@ $profil = tampilData($query_profil);
         </div>
     </div>
     <!-- Galeri End -->
+
+    <!-- Pengumuman Start -->
+    <div class="container-xxl py-5" id="pengumuman">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Pengumuman</h6>
+                <h1 class="mb-5">Pengumuman</h1>
+            </div>
+            <div class="row g-4">
+                <?php
+                foreach ($pengumuman as $p) {
+                ?>
+                    <div class="col-3">
+                        <div class="card gap-1 wow fadeInUp" data-wow-delay="0.1s" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $p['judul'] ?></h5>
+                                <p class="card-text"><?= substr($p['pengumuman'], 0, 50) . '...' ?></p>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-<?= $p['id'] ?>">
+                                    Detail
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal-<?= $p['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModal-<?= $p['id'] ?>Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModal-<?= $p['id'] ?>Label"><?= $p['judul'] ?></h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <?= $p['pengumuman'] ?>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+    <!-- Pengumuman End -->
 
     <!-- Kontak Start -->
     <div class="container-xxl py-5" id="kontak">
@@ -276,6 +352,9 @@ $profil = tampilData($query_profil);
     <!-- Back to Top -->
     <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
