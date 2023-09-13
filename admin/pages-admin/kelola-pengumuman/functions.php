@@ -68,13 +68,7 @@ function shareWA($data)
         $isi = $getPengumuman[0]['pengumuman'];
     }
 
-    $pengumuman = "
-        <h2>
-            <strong>$judul</strong>
-        </h2>
-	    <br>
-	    <p>$isi</p>
-    ";
+    $pengumuman = "$judul\n$isi";
 
     $target = null;
     foreach ($no_hp as $val) {

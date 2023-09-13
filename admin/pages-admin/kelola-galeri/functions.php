@@ -109,5 +109,3 @@ function uploadFoto()
     move_uploaded_file($tmpName, 'assets-admin/images/' . $namaFileBaru);
     return $namaFileBaru;
 }
-
-?>

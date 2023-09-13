@@ -176,17 +176,42 @@ $pengumuman = tampilData($query_pengumuman);
                 <h6 class="section-title bg-white text-center text-primary px-3">Galeri</h6>
                 <h1 class="mb-5">Dokumentasi</h1>
             </div>
+
             <div class="row g-4 justify-content-center">
                 <!-- Looping untuk menampilkan data galeri -->
                 <?php foreach ($galeri as $gr) : ?>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="package-item">
-                            <div class="overflow-hidden">
-                                <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
+                    <a href="#galeriModal-<?= $gr['id_galeri'] ?>" data-toggle="modal">
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="package-item">
+                                <div class="overflow-hidden">
+                                    <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
+                                </div>
+                                <div class="text-center p-4">
+                                    <h3 class="mb-3"><?= $gr['judul']; ?></h3>
+                                    <p><?= $gr['keterangan']; ?></p>
+                                </div>
                             </div>
-                            <div class="text-center p-4">
-                                <h3 class="mb-3"><?= $gr['judul']; ?></h3>
-                                <p><?= $gr['keterangan']; ?></p>
+                        </div>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="galeriModal-<?= $gr['id_galeri'] ?>" tabindex="-1" role="dialog" aria-labelledby="galeriModal-<?= $gr['id_galeri'] ?>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="package-item">
+                                        <div class="overflow-hidden">
+                                            <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
+                                        </div>
+                                        <div class="text-center p-4">
+                                            <h3 class="mb-3"><?= $gr['judul']; ?></h3>
+                                            <p><?= $gr['keterangan']; ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
