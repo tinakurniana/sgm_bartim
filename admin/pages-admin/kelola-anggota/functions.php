@@ -23,6 +23,7 @@ function tambahDataAnggota($data) // Function untuk menambah data anggota
     $luas_plasma = htmlspecialchars($data['luas_plasma']);
     $no_rek = htmlspecialchars($data['no_rek']);
     $bank = htmlspecialchars($data['bank']);
+    $status = htmlspecialchars($data['status']);
     $no_hp = htmlspecialchars($data['no_hp']);
 
     // memanggil function uploadFoto
@@ -42,7 +43,7 @@ function tambahDataAnggota($data) // Function untuk menambah data anggota
         echo '<script>alert("Data Gagal Ditambahkan! Pembagian hasil di tahun tersebut sudah dilakukan"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
     } else {
         // query untuk insert data anggota
-        $query = "INSERT INTO anggota VALUES ('', '$username', '$password', '$nama', '$no_kartu', '$no_registrasi', '$alamat', '$ktp', '$luas_plasma', '$foto', '$no_rek', '$bank', '$tahun_bergabung','$no_hp')";
+        $query = "INSERT INTO anggota VALUES ('', '$username', '$password', '$nama', '$no_kartu', '$no_registrasi', '$alamat', '$ktp', '$luas_plasma', '$foto', '$no_rek', '$bank', '$tahun_bergabung','$no_hp', 'Aktif')";
         // jika query berhasil dieksekusi maka akan menambahkan data lagi ke tabel simpanan pokok
         if (mysqli_query($conn, $query)) {
             // mengembalikan id dari query terakhir
@@ -61,20 +62,20 @@ function tambahDataAnggota($data) // Function untuk menambah data anggota
     mysqli_close($conn);
 }
 
-function hapusDataAnggota($data)
-{
-    global $conn;
-    $id_anggota = htmlspecialchars($data['btn-hapus']);
+// function hapusDataAnggota($data)
+// {
+//     global $conn;
+//     $id_anggota = htmlspecialchars($data['btn-hapus']);
 
-    $query = "DELETE FROM anggota WHERE anggota.id_anggota = '$id_anggota'";
+//     $query = "DELETE FROM anggota WHERE anggota.id_anggota = '$id_anggota'";
 
-    if (mysqli_query($conn, $query)) {
-        echo '<script>alert("Data Berhasil Dihapus"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
-    } else {
-        echo '<script>alert("Data Berhasil Dihapus"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
-    }
-    mysqli_close($conn);
-}
+//     if (mysqli_query($conn, $query)) {
+//         echo '<script>alert("Data Berhasil Dihapus"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
+//     } else {
+//         echo '<script>alert("Data Berhasil Dihapus"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
+//     }
+//     mysqli_close($conn);
+// }
 
 function editDataAnggota($data)
 {
@@ -102,6 +103,22 @@ function editDataAnggota($data)
         echo '<script>alert("Data Berhasil Diedit"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
     } else {
         echo '<script>alert("Data Gagal Diedit"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
+    }
+    mysqli_close($conn);
+}
+
+function editStatusAnggota($data)
+{
+    global $conn;
+    $id_anggota = htmlspecialchars($data['btn-edit-status']);
+    $status = htmlspecialchars($data['status']);
+
+    $query = "UPDATE anggota SET status = '$status' WHERE id_anggota = '$id_anggota'";
+
+    if (mysqli_query($conn, $query)) {
+        echo '<script>alert("Status Berhasil Diedit"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
+    } else {
+        echo '<script>alert("Status Gagal Diedit"); location.href = "indexAdmin.php?p=kelola-anggota&m=anggota";</script>';
     }
     mysqli_close($conn);
 }

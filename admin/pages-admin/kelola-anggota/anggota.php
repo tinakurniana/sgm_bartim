@@ -18,9 +18,12 @@ if (isset($_POST['btn-tambah'])) {
 if (isset($_POST['btn-edit'])) {
 	editDataAnggota($_POST);
 }
-if (isset($_POST['btn-hapus'])) {
-	hapusDataAnggota($_POST);
+if (isset($_POST['btn-edit-status'])) {
+	editStatusAnggota($_POST);
 }
+// if (isset($_POST['btn-hapus'])) {
+// 	hapusDataAnggota($_POST);
+// }
 
 ?>
 
@@ -70,6 +73,7 @@ if (isset($_POST['btn-hapus'])) {
 										<th>Bank</th>
 										<th>Username</th>
 										<th>No.HP</th>
+										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -95,13 +99,26 @@ if (isset($_POST['btn-hapus'])) {
 											<td><?= $row['bank']; ?></td>
 											<td><?= $row['username']; ?></td>
 											<td><?= $row['no_hp']; ?></td>
+											<td>
+												<?php
+												if ($row['status'] == 'Aktif') {
+												?>
+													<span class="label label-success label-sm"><?= $row['status']; ?> </span>
+												<?php
+												} else {
+												?>
+													<span class="label label-danger label-sm"><?= $row['status']; ?> </span>
+												<?php
+												}
+												?>
+											</td>
 											<td class="center">
 												<div class="action-buttons">
 													<a data-rel="tooltip" data-placement="top" title="Ubah" style="margin-right:5px" class="blue tooltip-info" data-toggle="modal" href="#edit-anggota-<?= $row['id_anggota']; ?>">
 														<i class="ace-icon fa fa-edit bigger-130"></i>
 													</a>
-													<a data-rel="tooltip" data-placement="top" title="Hapus" style="margin-right:5px" class="red tooltip-error" data-toggle="modal" href="#hapus-anggota-<?= $row['id_anggota']; ?>">
-														<i class="ace-icon fa fa-trash-o bigger-130"></i>
+													<a data-rel="tooltip" data-placement="top" title="Ubah Status" style="margin-right:5px" class="info tooltip-info" data-toggle="modal" href="#status-anggota-<?= $row['id_anggota']; ?>">
+														<i class="ace-icon fa fa-cog bigger-130"></i>
 													</a>
 												</div>
 											</td>
@@ -293,6 +310,43 @@ if (isset($_POST['btn-hapus'])) {
 		</div>
 	<?php endforeach; ?>
 	<!-- End Edit Anggota -->
+
+
+	<!-- Modal Edit Status -->
+	<?php
+	foreach ($anggota as $row) :
+	?>
+		<div class="modal fade" id="status-anggota-<?= $row['id_anggota']; ?>">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form class="form-horizontal" method="POST" role="form" enctype="multipart/form-data">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title"><i class="ace-icon fa fa-edit">Form Edit Status Anggota</i></h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="row-sm-4">
+										<label class="control-label" for="status">Status</label>
+										<select name="status" id="status" class="col-xs-12 col-sm-12">
+											<option value="Aktif">Aktif</option>
+											<option value="Non aktif">Non aktif</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" name="btn-edit-status" value="<?= $row['id_anggota'] ?>">Edit</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+	<?php endforeach; ?>
+	<!-- End Edit Status -->
 
 	<!-- Modal Hapus -->
 	<?php

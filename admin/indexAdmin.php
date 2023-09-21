@@ -614,7 +614,7 @@ if (isset($_POST['reset'])) {
 
             // initiate dataTables plugin
             var oTable1 =
-                $('#dynamic-table')
+                $('#dynamic-table, #dynamic-table2')
                 //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
                 .dataTable({
                     bAutoWidth: false,

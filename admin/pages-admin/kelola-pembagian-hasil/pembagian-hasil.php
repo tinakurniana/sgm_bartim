@@ -32,7 +32,8 @@ $query_anggota = "SELECT anggota.* FROM anggota INNER JOIN tahun ON anggota.`id_
 					WHERE tahun.`tahun` BETWEEN '$tahun_terkecil' AND '$tahun_now2' AND NOT EXISTS 
                         (SELECT * 
                             FROM pembagian_hasil 
-                            WHERE pembagian_hasil.id_anggota = anggota.id_anggota AND pembagian_hasil.`id_bulan` = $id_bulan AND pembagian_hasil.`id_tahun` = $id_tahun);";
+                            WHERE pembagian_hasil.id_anggota = anggota.id_anggota AND pembagian_hasil.`id_bulan` = $id_bulan AND pembagian_hasil.`id_tahun` = $id_tahun) 
+						AND anggota.status = 'Aktif';";
 $anggota = tampilData($query_anggota);
 
 $query_luas = "SELECT SUM(luas_plasma) AS luas FROM anggota INNER JOIN pembagian_hasil ON pembagian_hasil.`id_anggota` = anggota.`id_anggota` WHERE pembagian_hasil.`id_bulan` = $id_bulan AND pembagian_hasil.`id_tahun` = $id_tahun;";
@@ -66,7 +67,7 @@ if (isset($_POST['btn-hapus'])) {
 						<div class="form-group">
 							<label class="col-sm-2 control-label no-padding-right">Total Luas Plasma (Ha) : </label>
 							<div class="col-sm-9">
-								<input readonly="" type="text" class="col-xs-12 col-sm-5" name="total_luas" id="total_luas" value="<?= $total_luas[0]['luas'].' Ha'; ?>" />
+								<input readonly="" type="text" class="col-xs-12 col-sm-5" name="total_luas" id="total_luas" value="<?= $total_luas[0]['luas'] . ' Ha'; ?>" />
 							</div>
 							<br><br>
 							<label class="col-sm-2 control-label no-padding-right">Total Hasil Produksi Petani : </label>

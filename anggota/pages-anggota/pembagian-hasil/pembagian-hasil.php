@@ -11,6 +11,11 @@ $query_tampil = "SELECT
                 WHERE anggota.id_anggota = $id";
 $pembagian_hasil = tampilData($query_tampil);
 
+$query_total = "SELECT SUM(total_bersih) AS total FROM pembagian_hasil
+				INNER JOIN anggota ON anggota.id_anggota = pembagian_hasil.id_anggota
+				WHERE anggota.id_anggota = $id";
+$total_pendapatan = tampilData($query_total);
+
 ?>
 
 
@@ -24,6 +29,14 @@ $pembagian_hasil = tampilData($query_tampil);
 	<div class="row">
 		<div class="col-xs-12">
 			<!-- PAGE CONTENT BEGINS -->
+			<div class="row">
+                <div class="col-xs-12">
+                    <div class="well">
+                        <h4 class="blue smaller dark">Total Pendapatan Bersih</h4>
+						Rp. <?= number_format($total_pendapatan[0]['total'], 2, ",", "."); ?>
+                    </div>
+                </div>
+            </div>
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="table-header">

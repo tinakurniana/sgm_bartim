@@ -14,6 +14,11 @@ $query_tampil = "SELECT
                 WHERE anggota.id_anggota = $id";
 $anggota = tampilData($query_tampil);
 
+$query_jumlah = "SELECT SUM(simpanan_wajib) AS jumlah FROM simpanan_wajib
+                INNER JOIN anggota ON anggota.id_anggota = simpanan_wajib.id_anggota
+                WHERE anggota.id_anggota = $id";
+$jumlah_simpanan = tampilData($query_jumlah);
+
 ?>
 
 <div class="page-content">
@@ -27,15 +32,20 @@ $anggota = tampilData($query_tampil);
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
             <div class="row">
-
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <div class="well">
                         <h4 class="blue smaller dark">Simpanan Pokok</h4>
                         Rp 50.000,00
                     </div>
-
                 </div>
-
+                <div class="col-xs-6">
+                    <div class="well">
+                        <h4 class="blue smaller dark">Total Simpanan Wajib</h4>
+                        Rp. <?= number_format($jumlah_simpanan[0]['jumlah'], 2, ",", "."); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-12">
                     <div class="table-header">
                         Data Simpanan Wajib
