@@ -177,11 +177,11 @@ $pengumuman = tampilData($query_pengumuman);
                 <h1 class="mb-5">Dokumentasi</h1>
             </div>
 
-            <div class="row g-4 justify-content-center">
+            <div class="row g-4 d-flex justify-content-center">
                 <!-- Looping untuk menampilkan data galeri -->
                 <?php foreach ($galeri as $gr) : ?>
-                    <a href="#galeriModal-<?= $gr['id_galeri'] ?>" data-toggle="modal">
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a href="#galeriModal-<?= $gr['id_galeri'] ?>" data-toggle="modal">
                             <div class="package-item">
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="admin/assets-admin/images/<?= $gr["foto"]; ?>" style="width: 100%; height:300px; object-fit:cover;" alt="">
@@ -191,8 +191,8 @@ $pengumuman = tampilData($query_pengumuman);
                                     <p><?= $gr['keterangan']; ?></p>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
 
                     <!-- Modal -->
                     <div class="modal fade" id="galeriModal-<?= $gr['id_galeri'] ?>" tabindex="-1" role="dialog" aria-labelledby="galeriModal-<?= $gr['id_galeri'] ?>" aria-hidden="true">
@@ -228,7 +228,7 @@ $pengumuman = tampilData($query_pengumuman);
                 <h6 class="section-title bg-white text-center text-primary px-3">Pengumuman</h6>
                 <h1 class="mb-5">Pengumuman</h1>
             </div>
-            <div class="row g-4">
+            <div class="row g-4 d-flex justify-content-center">
                 <?php
                 foreach ($pengumuman as $p) {
                 ?>
